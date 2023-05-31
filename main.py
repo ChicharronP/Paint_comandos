@@ -1,4 +1,4 @@
-import pygame
+import pygame 
 import dibujado
 import colores
 import help
@@ -36,7 +36,7 @@ def procesar_comando(comando):
             dibujado.linea_v(surface, color, x, y1, y2, thickness)
         elif partes[1] == "-d":
             x1, y1, x2, y2 = map(int, partes[2:])
-            dibujado.linea_d(surface, color, x1, y1, x2, y2, thickness)
+            dibujado.linea_d(surface, color, x1, y1, x2, y2)
         else:
             print(f"Error: Comando desconocido '{comando}'")
     elif len(partes) > 0 and partes[0] == "-color":
