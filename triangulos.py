@@ -1,3 +1,8 @@
+#pylint: disable = E1101
+#pylint: disable = C0103
+#pylint: disable = C0116
+#pylint: disable = R0913
+
 from dibujado import linea
 
 #Genera un triangulo equilatero a partir de su spawneo y la longitud de sus lados

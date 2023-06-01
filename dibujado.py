@@ -1,3 +1,7 @@
+#pylint: disable = E1101
+#pylint: disable = C0103
+#pylint: disable = R0913
+
 import pygame
 
 #Con los valores dados genera una linea de punto A a punto B
