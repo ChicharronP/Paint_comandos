@@ -7,5 +7,5 @@ def ayuda():
     print("-fondo 'Nombre_COLOR' cambia el color del fondo")
     print("'-grosor' 'NUM_PIXELES' cambia el grosor de los trazos siempre y cuando el valor sea mayor a 1")
     print("'figura -circulo' 'POSICIÓN_X' 'POSICIÓN_Y' 'RADIO' genera un circulo")
-    print("'figura -triangulo' 'POSICIÓN_X1' 'POSICIÓN_Y1' 'POSICIÓN_X2' 'POSICIÓN_Y2' 'POSICIÓN_X3' 'POSICIÓN_Y3")
+    print("'figura -triangulo' 'POSICIÓN_X1' 'POSICIÓN_Y1' 'POSICIÓN_X2' 'POSICIÓN_Y2' 'POSICIÓN_X3' 'POSICIÓN_Y3' genera un triangulo a partir de los tres puntos dados para dibujar las lineas")
     
