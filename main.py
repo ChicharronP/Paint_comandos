@@ -1,7 +1,10 @@
+#modulos utilizados para que el programa funcione correctamente
 import pygame 
 import dibujado
 import colores
 import help
+import triangulos
+import figuras
 
 # Inicializar Pygame
 pygame.init()
@@ -14,13 +17,6 @@ surface = pygame.display.set_mode((width, height))
 # Establecer el color predeterminado
 color = (0, 0, 255)  # Color azul por defecto
 thickness = 1  # Grosor por defecto
-
-def linea_h(surface, color, x1, x2, y, thickness):
-    for t in range(thickness):
-        y_offset = y + t  # Aumentar el desplazamiento vertical en cada iteración
-        for i in range(x1, x2 + 1):
-            surface.set_at((i, y_offset), color)
-    pygame.display.flip()
 
 #Funcion de selección de comandos
 def procesar_comando(comando):
@@ -37,20 +33,28 @@ def procesar_comando(comando):
     elif len(partes) > 0 and partes[0] == "figura":
         if partes[1] == "-circulo": #Dibuja un circulo con los puntos de origen y el radio de este
             centro_x, centro_y, radio = map(int, partes[2:])
-            dibujado.circulo(surface, color, centro_x, centro_y, radio)
-        elif partes[1] == "-triangulo": #Dibuja un triangulo dando los tres puntos de este, para unirlos con lineas
-            if len(partes) == 8:
-                x1, y1, x2, y2, x3, y3 = map(int, partes[2:])
-                dibujado.triangulo(surface, color, x1, y1, x2, y2, x3, y3)
+            figuras.circulo(surface, color, centro_x, centro_y, radio)
         elif partes[1] == "-cuadrado": #Dibuja en pantalla un cuadrado con las coordenadas y el tamaño de lado
             x, y, lado = map(int,partes[2:])
-            dibujado.cuadrado(surface, color, x, y, lado)
+            figuras.cuadrado(surface, color, x, y, lado)
+        elif partes[1] == "triangulo":
+            if partes[2] == "-equilatero": #dibuja un triangulo equilatero
+                x, y, lado = map(int, partes[3:])
+                triangulos.equilatero(surface, color, x, y, lado)
+            elif partes[2] == "-isoceles": #dibuja un triangulo isoceles
+                x, y, base, altura = map(int, partes[3:])
+                triangulos.isoceles(surface, color, x, y, base, altura)
+            elif partes[2] == "-escaleno": #dibuja un triangulo escaleno
+                x1, y1, x2, y2, x3, y3 = map(int, partes[3:])
+                triangulos.escaleno(surface, color, x1, y1, x2, y2, x3, y3)
+            else:
+                print(f"Error: Comando desconocido '{comando}'")
         else:
             print(f"Error: Comando desconocido '{comando}'")
-    elif len(partes) > 0 and partes[0] == "-color": 
-        if partes[1] == "ls": #Despliega una lista con los colores disponibles a elegir
+    elif len(partes) > 0 and partes[0] == "color": 
+        if partes[1] == "-ls": #Despliega una lista con los colores disponibles a elegir
             colores.lista()
-        elif partes[1] == "set": #Selecciona el color que el usuario elija
+        elif partes[1] == "-set": #Selecciona el color que el usuario elija
             if len(partes) > 2:
                 new_color = partes[2]
                 if colores.validar_color(new_color):
@@ -62,12 +66,12 @@ def procesar_comando(comando):
                 print("Error: Debe proporcionar un color para establecer.")
         else:
             print(f"Error: Comando desconocido '{comando}'")
-    elif len(partes) > 0 and partes[0] == "-fondo": #Con los colores predefinidos cambia el color del fondo
+    elif len(partes) > 0 and partes[0] == "fondo": #Con los colores predefinidos cambia el color del fondo
         if len(partes) > 1:
             new_color = partes[1]
-            if colores.validar_color(new_color):
+            if colores.validar_color(new_color): #valida que el color escogido por el usuario exista en el programa
                 background_color = colores.obtener_color(new_color)
-                surface.fill(background_color)
+                surface.fill(background_color) #llama a la funcion encargada de colorear el fondo de la ventana
                 print(f"Color de fondo cambiado a {new_color}")
             else:
                 print(f"Error: El color {new_color} no es válido.")
