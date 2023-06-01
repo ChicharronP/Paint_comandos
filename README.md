@@ -7,15 +7,16 @@ Este es un programa editor de imagenes que funciona a través de terminal. Este 
   además que unicamente funciona con comandos que se 
   ingresan a un archivo de comandos
   
-##Instrucciones de instalación
+## Instrucciones de instalación
   
 1. Instala Python 3 en tu equipo (https://www.python.org/downloads/).
 2. Instala Pygame ejecutando el siguiente comando en la terminal: `pip install pygame`.
 3. Descarga los archivos del juego desde GitHub.
 
-##Instrucciones de uso
+## Instrucciones de uso
 
   1. Dentro del archivo de comandos ejecute las siguientes instrucciones dependiendo que quiera dibujar
+      Para poder visualizar estos comandos en el programa, ejecute la instrucción "/help"
       a. "'linea = ' 'coordenada x inicial' 'coordenada y inicial' 'coordenada x final' 'coordenada y final' genera una linea diagonal".
       
       b. "'color -ls' genera una lista con los colores disponibles para dibujar".
