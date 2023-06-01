@@ -22,27 +22,35 @@ def linea_h(surface, color, x1, x2, y, thickness):
             surface.set_at((i, y_offset), color)
     pygame.display.flip()
 
+#Funcion de selección de comandos
 def procesar_comando(comando):
     global color, thickness  # Variables locales utilizadas por todo el código
     partes = comando.strip().split()
-    if len(partes) > 0 and partes[0] == "/help":
+    if len(partes) > 0 and partes[0] == "/help": #Desgliega en la termimal los comandos para ejecutar
         help.ayuda()
-    elif len(partes) > 0 and partes[0] == "linea":
-        if partes[1] == "-h":
-            x1, x2, y = map(int, partes[2:])
-            dibujado.linea_h(surface, color, x1, x2, y, thickness)
-        elif partes[1] == "-v":
-            x, y1, y2 = map(int, partes[2:])
-            dibujado.linea_v(surface, color, x, y1, y2, thickness)
-        elif partes[1] == "-d":
+    elif len(partes) > 0 and partes[0] == "linea": 
+        if partes[1] == "=": #Dibuja en pantalla una linea con los puntos de incio y fin
             x1, y1, x2, y2 = map(int, partes[2:])
-            dibujado.linea_d(surface, color, x1, y1, x2, y2)
+            dibujado.linea(surface, color, x1, y1, x2, y2)
         else:
             print(f"Error: Comando desconocido '{comando}'")
-    elif len(partes) > 0 and partes[0] == "-color":
-        if partes[1] == "ls":
+    elif len(partes) > 0 and partes[0] == "figura":
+        if partes[1] == "-circulo": #Dibuja un circulo con los puntos de origen y el radio de este
+            centro_x, centro_y, radio = map(int, partes[2:])
+            dibujado.circulo(surface, color, centro_x, centro_y, radio)
+        elif partes[1] == "-triangulo": #Dibuja un triangulo dando los tres puntos de este, para unirlos con lineas
+            if len(partes) == 8:
+                x1, y1, x2, y2, x3, y3 = map(int, partes[2:])
+                dibujado.triangulo(surface, color, x1, y1, x2, y2, x3, y3)
+        elif partes[1] == "-cuadrado": #Dibuja en pantalla un cuadrado con las coordenadas y el tamaño de lado
+            x, y, lado = map(int,partes[2:])
+            dibujado.cuadrado(surface, color, x, y, lado)
+        else:
+            print(f"Error: Comando desconocido '{comando}'")
+    elif len(partes) > 0 and partes[0] == "-color": 
+        if partes[1] == "ls": #Despliega una lista con los colores disponibles a elegir
             colores.lista()
-        elif partes[1] == "set":
+        elif partes[1] == "set": #Selecciona el color que el usuario elija
             if len(partes) > 2:
                 new_color = partes[2]
                 if colores.validar_color(new_color):
@@ -54,7 +62,7 @@ def procesar_comando(comando):
                 print("Error: Debe proporcionar un color para establecer.")
         else:
             print(f"Error: Comando desconocido '{comando}'")
-    elif len(partes) > 0 and partes[0] == "-fondo":
+    elif len(partes) > 0 and partes[0] == "-fondo": #Con los colores predefinidos cambia el color del fondo
         if len(partes) > 1:
             new_color = partes[1]
             if colores.validar_color(new_color):
@@ -65,7 +73,7 @@ def procesar_comando(comando):
                 print(f"Error: El color {new_color} no es válido.")
         else:
             print("Error: Debe proporcionar un color para establecer el fondo.")
-    elif len(partes) > 0 and partes[0] == "-grosor":
+    elif len(partes) > 0 and partes[0] == "-grosor": #Aumetna el grosor de los pixeles generados
         if len(partes) > 1:
             new_thickness = int(partes[1])
             if new_thickness >= 1:
@@ -78,7 +86,7 @@ def procesar_comando(comando):
     else:
         print(f"Error: Comando desconocido '{comando}'")
 
-
+#Abre el archivo .cmd en donde se estarán guardando los comandos que elija el usuario
 myfile = open("comandos.cmd", "r")
 for cmd in myfile:
     cmd = cmd.strip()
@@ -86,6 +94,7 @@ for cmd in myfile:
     print(f"-{cmd}-")
 myfile.close()
 
+#Bucle que mantiene a la ventana del programa abierta
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
