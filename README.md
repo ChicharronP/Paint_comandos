@@ -1,5 +1,5 @@
 # Paint_comandos
-Este es un programa editor de imagenes que funciona a través de terminal. Este es un programa creado por Diego Soto del TECNM ITEde de la carrera Ingenieria en Sistemas computacionales, para cualqueir duda o problema contactame a Instagram como @diegofcosoto
+Este es un programa editor de imagenes que funciona a través de terminal. Este es un programa creado por Diego Soto del TECNM ITE de la carrera Ingenieria en Sistemas computacionales, para cualqueir duda o problema contactame a Instagram como @diegofcosoto
 
 ## DESCRIPCIÓN:
 
